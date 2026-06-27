@@ -203,32 +203,28 @@
             <div><div class="opcion-texto">Expresar ideas a través de la creatividad</div><div class="opcion-sub">Inventiva y originalidad</div></div>
           </div>
         </div>
-        <button class="btn-siguiente" id="btn-4" disabled onclick="calcularYMostrar()">Ver mi resultado →</button>
+        <button class="btn-siguiente" id="btn-4" disabled onclick="avanzar('email')">Ver mi resultado →</button>
       </div>
 
       <!-- PASO 5: CAPTURA EMAIL -->
       <div class="paso" id="paso-email">
         <div class="email-section">
-          <div style="font-size:3.5rem;margin-bottom:16px;">🐰✨</div>
-          <h2>¡Ya sé cuál es el libro perfecto para tu hijo!</h2>
-          <p>Dejame tu email y te mando el resultado ahora — más una actividad sorpresa de regalo.</p>
+          <div style="font-size:2.5rem;margin-bottom:16px;">✨</div>
+          <h2>¡Un último paso!</h2>
+          <p style="margin-bottom: 28px;">Dejanos tu email y nombre para enviarte tu resultado personalizado</p>
 
-          <!-- Kit form: reemplazá 9616766 con tu ID real -->
           <form class="email-form" id="kit-form"
             action="https://app.kit.com/forms/9616766/subscriptions"
             method="post"
             data-sv-form="9616766"
             data-uid="9616766">
-            <input type="hidden" name="fields[libro_recomendado]" id="campo-libro" value="" />
-            <input type="hidden" name="fields[edad_hijo]" id="campo-edad" value="" />
-            <input type="hidden" name="fields[interes]" id="campo-interes" value="" />
-            <input type="hidden" name="fields[personalidad]" id="campo-personalidad" value="" />
+            <input type="hidden" name="fields[archetype]" id="campo-archetype" value="" />
             <input type="hidden" name="redirect" id="campo-redirect" value="" />
             <input
               class="email-input"
               type="email"
               name="email_address"
-              placeholder="tucorreo@ejemplo.com"
+              placeholder="tu@email.com"
               required
               autocomplete="email"
             />
@@ -236,17 +232,13 @@
               class="email-input"
               type="text"
               name="fields[first_name]"
-              placeholder="Tu nombre (opcional)"
+              placeholder="Tu nombre"
+              required
               autocomplete="given-name"
             />
-            <button type="submit" class="btn-resultado">¡Mostrame mi libro! →</button>
+            <button type="submit" class="btn-resultado">Ver mi resultado →</button>
           </form>
-          <p class="email-disclaimer">Sin spam. Solo libros y aventuras para tu hijo. Podés darte de baja cuando quieras.</p>
-
-          <!-- Fallback: si no tienen Kit aún, mostrar directo -->
-          <p style="margin-top:20px;font-size:.82rem;color:var(--ink-soft);">
-            <a href="#" onclick="saltarEmail(event)" style="color:var(--teal-dark);font-weight:600;">Prefiero ver el resultado sin suscribirme →</a>
-          </p>
+          <p class="email-disclaimer">Sin spam. Solo contenido personalizado para tu hijo.</p>
         </div>
       </div>
 
@@ -400,42 +392,18 @@
     }
 
     function avanzar(paso) {
-      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
-      document.getElementById(`paso-${paso}`).classList.add('activo');
-      const pct = { 2: 50, 3: 75, 4: 100 }[paso] || 25;
-      document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-label').textContent = `Paso ${paso} de 4`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function calcularYMostrar() {
-      const { archetype, grade } = calcularArchetype();
-      const data = archetypes[archetype];
-
-      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
-      document.getElementById('resultado').classList.add('visible');
-
-      document.getElementById('resultado-emoji').textContent = data.emoji;
-      document.getElementById('resultado-titulo').textContent = `Tu hijo es un ${data.nombre}`;
-      document.getElementById('resultado-descripcion').textContent = data.descripcion;
-      document.getElementById('resultado-grade').textContent = grade;
-      document.getElementById('resultado-shareable').textContent = data.shareable;
-
-      // Prellenar form Kit con archetype
-      document.getElementById('campo-archetype').value = archetype;
-      document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + archetype;
-
-      // Mostrar libros recomendados
-      const librosRecomendados = data.libros.map(key => libros[key]);
-      document.getElementById('otros-libros').innerHTML = librosRecomendados.map(l =>
-        `<a href="${l.amazon}" target="_blank" rel="noopener" class="otro-libro">
-          <img src="${l.cover}" alt="${l.nombre}" style="width:90px;height:120px;object-fit:cover;" />
-          <span>${l.nombre}</span>
-        </a>`
-      ).join('');
-
-      document.getElementById('progress-fill').style.width = '100%';
-      document.getElementById('progress-label').textContent = '¡Tu resultado está listo!';
+      if (paso === 'email') {
+        document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+        document.getElementById('paso-email').classList.add('activo');
+        document.getElementById('progress-fill').style.width = '90%';
+        document.getElementById('progress-label').textContent = 'Falta poco...';
+      } else {
+        document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+        document.getElementById(`paso-${paso}`).classList.add('activo');
+        const pct = { 2: 50, 3: 75, 4: 100 }[paso] || 25;
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-label').textContent = `Paso ${paso} de 4`;
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -453,10 +421,44 @@
 
     // Manejar submit del form de Kit
     document.getElementById('kit-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
       const email = this.querySelector('input[type="email"]').value;
-      const archetype = document.getElementById('campo-archetype').value;
-      await registrarEnSupabase(email, 'padre/madre', archetype);
+      const nombre = this.querySelector('input[name="fields[first_name]"]').value;
+      const { archetype } = calcularArchetype();
+
+      // Prellenar field oculto con archetype
+      document.getElementById('campo-archetype').value = archetype;
+
+      // Registrar en Supabase
+      await registrarEnSupabase(email, nombre, archetype);
+
+      // Mostrar resultado
+      mostrarResultadoDelArchetype(archetype);
     });
+
+    function mostrarResultadoDelArchetype(archetype) {
+      const data = archetypes[archetype];
+      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+      document.getElementById('resultado').classList.add('visible');
+
+      document.getElementById('resultado-emoji').textContent = data.emoji;
+      document.getElementById('resultado-titulo').textContent = `Tu hijo es un ${data.nombre}`;
+      document.getElementById('resultado-descripcion').textContent = data.descripcion;
+      document.getElementById('resultado-grade').textContent = 'A';
+      document.getElementById('resultado-shareable').textContent = data.shareable;
+
+      const librosRecomendados = data.libros.map(key => libros[key]);
+      document.getElementById('otros-libros').innerHTML = librosRecomendados.map(l =>
+        `<a href="${l.amazon}" target="_blank" rel="noopener" class="otro-libro">
+          <img src="${l.cover}" alt="${l.nombre}" style="width:90px;height:120px;object-fit:cover;" />
+          <span>${l.nombre}</span>
+        </a>`
+      ).join('');
+
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = '¡Tu resultado está listo!';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     // Detectar resultado en URL (post-redirect de Kit)
     const params = new URLSearchParams(window.location.search);
