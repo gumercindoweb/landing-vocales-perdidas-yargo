@@ -117,93 +117,93 @@
 
       <!-- HEADER -->
       <div class="quiz-header">
-        <div class="quiz-eyebrow">✨ Quiz gratuito</div>
-        <h1>¿Cuál libro de Vismel<br/>es para tu hijo?</h1>
-        <p>4 preguntas · 60 segundos · resultado inmediato</p>
+        <div class="quiz-eyebrow">✨ Descubridor</div>
+        <h1>¿Qué tipo de aprendiz<br/>es tu hijo?</h1>
+        <p>4 preguntas · descubre su estilo · resultado inmediato</p>
       </div>
 
       <!-- PROGRESO -->
       <p class="progress-label" id="progress-label">Paso 1 de 4</p>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:25%"></div></div>
 
-      <!-- PASO 1: EDAD -->
+      <!-- PASO 1 -->
       <div class="paso activo" id="paso-1">
-        <p class="paso-titulo">¿Cuántos años tiene tu hijo?</p>
+        <p class="paso-titulo">Cuando está aburrido, tu hijo generalmente...</p>
         <div class="opciones">
-          <div class="opcion" data-paso="1" data-valor="bebes">
-            <span class="opcion-emoji">🍼</span>
-            <div><div class="opcion-texto">0 a 3 años</div><div class="opcion-sub">Bebé o niño pequeño</div></div>
+          <div class="opcion" data-paso="1" data-tipo="soñador">
+            <span class="opcion-emoji">🐰</span>
+            <div><div class="opcion-texto">Se inventa historias o personajes en su cabeza</div><div class="opcion-sub">Vive en su mundo imaginario</div></div>
           </div>
-          <div class="opcion" data-paso="1" data-valor="ninos">
+          <div class="opcion" data-paso="1" data-tipo="explorador">
+            <span class="opcion-emoji">🔧</span>
+            <div><div class="opcion-texto">Arma, experimenta, prueba cómo funcionan las cosas</div><div class="opcion-sub">Siempre desarmando y armando</div></div>
+          </div>
+          <div class="opcion" data-paso="1" data-tipo="artista">
             <span class="opcion-emoji">🎨</span>
-            <div><div class="opcion-texto">4 a 8 años</div><div class="opcion-sub">Edad de juego y creatividad</div></div>
-          </div>
-          <div class="opcion" data-paso="1" data-valor="mayores">
-            <span class="opcion-emoji">🔭</span>
-            <div><div class="opcion-texto">5 a 12 años</div><div class="opcion-sub">Ya lee solo o con poca ayuda</div></div>
+            <div><div class="opcion-texto">Dibuja, pinta, crea algo visual</div><div class="opcion-sub">Expresa con manos y colores</div></div>
           </div>
         </div>
         <button class="btn-siguiente" id="btn-1" disabled onclick="avanzar(2)">Siguiente →</button>
       </div>
 
-      <!-- PASO 2: QUÉ APRENDER -->
+      <!-- PASO 2 -->
       <div class="paso" id="paso-2">
-        <p class="paso-titulo">¿Qué le querés enseñar?</p>
+        <p class="paso-titulo">Lo que más lo engancha es...</p>
         <div class="opciones">
-          <div class="opcion" data-paso="2" data-valor="letras">
-            <span class="opcion-emoji">🔤</span>
-            <div><div class="opcion-texto">Letras, vocales y lenguaje</div><div class="opcion-sub">Iniciarlo en la lectura de forma divertida</div></div>
+          <div class="opcion" data-paso="2" data-tipo="soñador">
+            <span class="opcion-emoji">📚</span>
+            <div><div class="opcion-texto">Historias con personajes que ama, que los hace propios</div><div class="opcion-sub">Se vive las aventuras</div></div>
           </div>
-          <div class="opcion" data-paso="2" data-valor="universo">
-            <span class="opcion-emoji">🌍</span>
-            <div><div class="opcion-texto">El universo, planetas y el mundo</div><div class="opcion-sub">Que entienda su lugar en el cosmos</div></div>
+          <div class="opcion" data-paso="2" data-tipo="explorador">
+            <span class="opcion-emoji">🔭</span>
+            <div><div class="opcion-texto">Descubrir el "por qué" de todo, entender cómo funciona</div><div class="opcion-sub">Siempre con preguntas</div></div>
           </div>
-          <div class="opcion" data-paso="2" data-valor="creatividad">
-            <span class="opcion-emoji">🎨</span>
-            <div><div class="opcion-texto">Arte, creatividad y expresión</div><div class="opcion-sub">Que juegue, pinte y se exprese</div></div>
+          <div class="opcion" data-paso="2" data-tipo="artista">
+            <span class="opcion-emoji">✨</span>
+            <div><div class="opcion-texto">Hacer cosas con las manos, expresarse libremente</div><div class="opcion-sub">Crear es su pasión</div></div>
           </div>
         </div>
         <button class="btn-siguiente" id="btn-2" disabled onclick="avanzar(3)">Siguiente →</button>
       </div>
 
-      <!-- PASO 3: OCASIÓN -->
+      <!-- PASO 3 -->
       <div class="paso" id="paso-3">
-        <p class="paso-titulo">¿Para qué ocasión?</p>
+        <p class="paso-titulo">Cuando algo es difícil, tu hijo tiende a...</p>
         <div class="opciones">
-          <div class="opcion" data-paso="3" data-valor="diario">
-            <span class="opcion-emoji">📖</span>
-            <div><div class="opcion-texto">Para leer juntos todos los días</div><div class="opcion-sub">Quiero crear un hábito de lectura</div></div>
+          <div class="opcion" data-paso="3" data-tipo="soñador">
+            <span class="opcion-emoji">💭</span>
+            <div><div class="opcion-texto">Imaginarse una historia para entenderlo</div><div class="opcion-sub">Conecta emocionalmente</div></div>
           </div>
-          <div class="opcion" data-paso="3" data-valor="regalo">
-            <span class="opcion-emoji">🎁</span>
-            <div><div class="opcion-texto">Como regalo especial</div><div class="opcion-sub">Cumpleaños, Navidad, Pascua…</div></div>
+          <div class="opcion" data-paso="3" data-tipo="explorador">
+            <span class="opcion-emoji">❓</span>
+            <div><div class="opcion-texto">Hace preguntas, quiere saber cada detalle</div><div class="opcion-sub">Necesita entender el "cómo"</div></div>
           </div>
-          <div class="opcion" data-paso="3" data-valor="aula">
-            <span class="opcion-emoji">🏫</span>
-            <div><div class="opcion-texto">Para usar en el aula o jardín</div><div class="opcion-sub">Soy maestra o educadora</div></div>
+          <div class="opcion" data-paso="3" data-tipo="artista">
+            <span class="opcion-emoji">🎯</span>
+            <div><div class="opcion-texto">Intentar hacerlo, jugar, experimentar hasta lograrlo</div><div class="opcion-sub">Aprende haciendo</div></div>
           </div>
         </div>
         <button class="btn-siguiente" id="btn-3" disabled onclick="avanzar(4)">Siguiente →</button>
       </div>
 
-      <!-- PASO 4: PERSONALIDAD -->
+      <!-- PASO 4 -->
       <div class="paso" id="paso-4">
-        <p class="paso-titulo">¿Cómo describís mejor a tu hijo?</p>
+        <p class="paso-titulo">Su mayor fortaleza es...</p>
         <div class="opciones">
-          <div class="opcion" data-paso="4" data-valor="cuentos">
-            <span class="opcion-emoji">🐰</span>
-            <div><div class="opcion-texto">Le encantan los cuentos y los personajes</div><div class="opcion-sub">Se engancha con historias y los hace propios</div></div>
+          <div class="opcion" data-paso="4" data-tipo="soñador">
+            <span class="opcion-emoji">💫</span>
+            <div><div class="opcion-texto">Conectar emocionalmente con personajes e historias</div><div class="opcion-sub">Empatía y imaginación</div></div>
           </div>
-          <div class="opcion" data-paso="4" data-valor="curioso">
-            <span class="opcion-emoji">🔭</span>
-            <div><div class="opcion-texto">Es curioso, siempre pregunta el por qué de todo</div><div class="opcion-sub">Quiere entender cómo funciona el mundo</div></div>
+          <div class="opcion" data-paso="4" data-tipo="explorador">
+            <span class="opcion-emoji">🧠</span>
+            <div><div class="opcion-texto">Hacer conexiones lógicas, curiosidad insaciable</div><div class="opcion-sub">Pensamiento analítico</div></div>
           </div>
-          <div class="opcion" data-paso="4" data-valor="creativo">
-            <span class="opcion-emoji">🎨</span>
-            <div><div class="opcion-texto">Le gusta dibujar, pintar y crear</div><div class="opcion-sub">Expresa todo con las manos y los colores</div></div>
+          <div class="opcion" data-paso="4" data-tipo="artista">
+            <span class="opcion-emoji">🎪</span>
+            <div><div class="opcion-texto">Expresar ideas a través de la creatividad</div><div class="opcion-sub">Inventiva y originalidad</div></div>
           </div>
         </div>
-        <button class="btn-siguiente" id="btn-4" disabled onclick="mostrarEmail()">Ver mi resultado →</button>
+        <button class="btn-siguiente" id="btn-4" disabled onclick="calcularYMostrar()">Ver mi resultado →</button>
       </div>
 
       <!-- PASO 5: CAPTURA EMAIL -->
@@ -252,17 +252,17 @@
 
       <!-- RESULTADO -->
       <div class="resultado-section" id="resultado">
-        <span class="resultado-badge">🎉 Tu libro ideal</span>
-        <h2 id="resultado-titulo"></h2>
-        <p class="porque" id="resultado-porque"></p>
-        <img id="resultado-cover" src="" alt="" class="resultado-libro-cover" />
-        <div class="resultado-libro-nombre" id="resultado-nombre"></div>
-        <div class="resultado-libro-edad" id="resultado-edad"></div>
-        <br/>
-        <a id="resultado-amazon" href="#" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon →</a>
+        <span class="resultado-badge" id="resultado-emoji">🐰</span>
+        <h2 id="resultado-titulo">Tu hijo es un Soñador de Cuentos</h2>
+        <p class="porque" id="resultado-descripcion">Conecta profundamente con historias y personajes. Vive en su mundo imaginario y ama las aventuras.</p>
 
+        <div style="margin: 32px 0; padding: 16px; background: var(--teal-light); border-radius: var(--radius); text-align: center;">
+          <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 8px;">Coherencia: <strong id="resultado-grade">A</strong></p>
+          <p style="font-size: 0.9rem; font-weight: 600; color: var(--ink);" id="resultado-shareable">📱 Comparte: "Mi hijo es un Soñador de Cuentos"</p>
+        </div>
+
+        <h3 style="font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.1rem; margin-top: 32px; margin-bottom: 16px;">Libros que le encantarán:</h3>
         <div class="otros-libros">
-          <p class="otros-titulo">También te puede interesar</p>
           <div class="otros-grid" id="otros-libros"></div>
         </div>
 
@@ -273,22 +273,43 @@
   </div>
 
   <script>
-    const respuestas = { edad: null, interes: null, ocasion: null, personalidad: null };
+    const respuestas = [];
 
-    async function registrarEnSupabase(email, nombre) {
+    // Archetypes con datos shareable
+    const archetypes = {
+      soñador: {
+        nombre: 'Soñador de Cuentos',
+        emoji: '🐰',
+        descripcion: 'Conecta profundamente con historias y personajes. Vive en su mundo imaginario y ama las aventuras.',
+        libros: ['vocales', 'familia'],
+        shareable: '📱 Comparte: "Mi hijo es un Soñador de Cuentos"'
+      },
+      explorador: {
+        nombre: 'Explorador Curioso',
+        emoji: '🔭',
+        descripcion: 'Pregunta sin parar, quiere entender cómo funciona todo. Su mente nunca deja de investigar.',
+        libros: ['familia', 'valentine'],
+        shareable: '📱 Comparte: "Mi hijo es un Explorador Curioso"'
+      },
+      artista: {
+        nombre: 'Artista Expresivo',
+        emoji: '🎨',
+        descripcion: 'Expresa todo a través de la creatividad. Sus manos siempre están creando algo nuevo.',
+        libros: ['valentine', 'vocales'],
+        shareable: '📱 Comparte: "Mi hijo es un Artista Expresivo"'
+      }
+    };
+
+    async function registrarEnSupabase(email, nombre, archetype) {
       try {
-        const libro = recomendar();
         const response = await fetch('https://epkyrbhzmuivxwmelayz.functions.supabase.co/registrar-quiz', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email,
             nombre,
-            edad_hijo: respuestas.edad,
-            interes: respuestas.interes,
-            ocasion: respuestas.ocasion,
-            personalidad: respuestas.personalidad,
-            libro_recomendado: libro
+            archetype,
+            respuestas: respuestas.join(',')
           })
         });
         if (!response.ok) {
@@ -335,14 +356,23 @@
     document.querySelectorAll('.opcion').forEach(op => {
       op.addEventListener('click', () => {
         const paso = op.dataset.paso;
+        const tipo = op.dataset.tipo;
         document.querySelectorAll(`.opcion[data-paso="${paso}"]`).forEach(o => o.classList.remove('seleccionada'));
         op.classList.add('seleccionada');
-        if (paso === '1') { respuestas.edad = op.dataset.valor; document.getElementById('btn-1').disabled = false; }
-        if (paso === '2') { respuestas.interes = op.dataset.valor; document.getElementById('btn-2').disabled = false; }
-        if (paso === '3') { respuestas.ocasion = op.dataset.valor; document.getElementById('btn-3').disabled = false; }
-        if (paso === '4') { respuestas.personalidad = op.dataset.valor; document.getElementById('btn-4').disabled = false; }
+        respuestas[paso - 1] = tipo;
+        document.getElementById(`btn-${paso}`).disabled = false;
       });
     });
+
+    function calcularArchetype() {
+      const scores = { soñador: 0, explorador: 0, artista: 0 };
+      respuestas.forEach(tipo => scores[tipo]++);
+      const types = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const archetype = types[0][0];
+      const maxScore = types[0][1];
+      const grade = maxScore === 4 ? 'A' : maxScore === 3 ? 'B' : 'C';
+      return { archetype, grade };
+    }
 
     function avanzar(paso) {
       document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
@@ -353,58 +383,35 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function mostrarEmail() {
-      const libro = recomendar();
-      // Prellenar campos ocultos del form de Kit
-      document.getElementById('campo-libro').value = libro;
-      document.getElementById('campo-edad').value = respuestas.edad;
-      document.getElementById('campo-interes').value = respuestas.interes;
-      document.getElementById('campo-personalidad').value = respuestas.personalidad;
-      document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + libro;
+    function calcularYMostrar() {
+      const { archetype, grade } = calcularArchetype();
+      const data = archetypes[archetype];
 
       document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
-      document.getElementById('paso-email').classList.add('activo');
-      document.getElementById('progress-fill').style.width = '100%';
-      document.getElementById('progress-label').textContent = '¡Casi listo!';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      document.getElementById('resultado').classList.add('visible');
 
-    function saltarEmail(e) {
-      e.preventDefault();
-      const libro = recomendar();
-      mostrarResultado(libro);
-    }
+      document.getElementById('resultado-emoji').textContent = data.emoji;
+      document.getElementById('resultado-titulo').textContent = `Tu hijo es un ${data.nombre}`;
+      document.getElementById('resultado-descripcion').textContent = data.descripcion;
+      document.getElementById('resultado-grade').textContent = grade;
+      document.getElementById('resultado-shareable').textContent = data.shareable;
 
-    function mostrarResultado(libroKey) {
-      const libro = libros[libroKey];
-      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
-      document.getElementById('paso-email').classList.remove('activo');
-
-      document.getElementById('resultado-titulo').textContent = '¡El libro perfecto para tu hijo es…';
-      document.getElementById('resultado-porque').textContent = libro.porque;
-      document.getElementById('resultado-cover').src = libro.cover;
-      document.getElementById('resultado-cover').alt = libro.nombre;
-      document.getElementById('resultado-nombre').textContent = libro.nombre;
-      document.getElementById('resultado-edad').textContent = libro.edad;
-      document.getElementById('resultado-amazon').href = libro.amazon;
-
-      // Otros libros
-      const otros = Object.entries(libros).filter(([k]) => k !== libroKey);
-      document.getElementById('otros-libros').innerHTML = otros.map(([, l]) =>
+      // Mostrar libros recomendados
+      const librosRecomendados = data.libros.map(key => libros[key]);
+      document.getElementById('otros-libros').innerHTML = librosRecomendados.map(l =>
         `<a href="${l.amazon}" target="_blank" rel="noopener" class="otro-libro">
           <img src="${l.cover}" alt="${l.nombre}" style="width:90px;height:120px;object-fit:cover;" />
           <span>${l.nombre}</span>
         </a>`
       ).join('');
 
-      document.getElementById('resultado').classList.add('visible');
       document.getElementById('progress-fill').style.width = '100%';
       document.getElementById('progress-label').textContent = '¡Tu resultado está listo!';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function reiniciar() {
-      respuestas.edad = null; respuestas.interes = null; respuestas.ocasion = null; respuestas.personalidad = null;
+      respuestas.length = 0;
       document.querySelectorAll('.opcion').forEach(o => o.classList.remove('seleccionada'));
       ['btn-1','btn-2','btn-3','btn-4'].forEach(id => document.getElementById(id).disabled = true);
       document.getElementById('resultado').classList.remove('visible');
