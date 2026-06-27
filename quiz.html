@@ -119,12 +119,12 @@
       <div class="quiz-header">
         <div class="quiz-eyebrow">✨ Quiz gratuito</div>
         <h1>¿Cuál libro de Vismel<br/>es para tu hijo?</h1>
-        <p>3 preguntas · 60 segundos · resultado inmediato</p>
+        <p>4 preguntas · 60 segundos · resultado inmediato</p>
       </div>
 
       <!-- PROGRESO -->
-      <p class="progress-label" id="progress-label">Paso 1 de 3</p>
-      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:33%"></div></div>
+      <p class="progress-label" id="progress-label">Paso 1 de 4</p>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:25%"></div></div>
 
       <!-- PASO 1: EDAD -->
       <div class="paso activo" id="paso-1">
@@ -183,10 +183,30 @@
             <div><div class="opcion-texto">Para usar en el aula o jardín</div><div class="opcion-sub">Soy maestra o educadora</div></div>
           </div>
         </div>
-        <button class="btn-siguiente" id="btn-3" disabled onclick="mostrarEmail()">Ver mi resultado →</button>
+        <button class="btn-siguiente" id="btn-3" disabled onclick="avanzar(4)">Siguiente →</button>
       </div>
 
-      <!-- PASO 4: CAPTURA EMAIL -->
+      <!-- PASO 4: PERSONALIDAD -->
+      <div class="paso" id="paso-4">
+        <p class="paso-titulo">¿Cómo describís mejor a tu hijo?</p>
+        <div class="opciones">
+          <div class="opcion" data-paso="4" data-valor="cuentos">
+            <span class="opcion-emoji">🐰</span>
+            <div><div class="opcion-texto">Le encantan los cuentos y los personajes</div><div class="opcion-sub">Se engancha con historias y los hace propios</div></div>
+          </div>
+          <div class="opcion" data-paso="4" data-valor="curioso">
+            <span class="opcion-emoji">🔭</span>
+            <div><div class="opcion-texto">Es curioso, siempre pregunta el por qué de todo</div><div class="opcion-sub">Quiere entender cómo funciona el mundo</div></div>
+          </div>
+          <div class="opcion" data-paso="4" data-valor="creativo">
+            <span class="opcion-emoji">🎨</span>
+            <div><div class="opcion-texto">Le gusta dibujar, pintar y crear</div><div class="opcion-sub">Expresa todo con las manos y los colores</div></div>
+          </div>
+        </div>
+        <button class="btn-siguiente" id="btn-4" disabled onclick="mostrarEmail()">Ver mi resultado →</button>
+      </div>
+
+      <!-- PASO 5: CAPTURA EMAIL -->
       <div class="paso" id="paso-email">
         <div class="email-section">
           <div style="font-size:3.5rem;margin-bottom:16px;">🐰✨</div>
@@ -202,6 +222,7 @@
             <input type="hidden" name="fields[libro_recomendado]" id="campo-libro" value="" />
             <input type="hidden" name="fields[edad_hijo]" id="campo-edad" value="" />
             <input type="hidden" name="fields[interes]" id="campo-interes" value="" />
+            <input type="hidden" name="fields[personalidad]" id="campo-personalidad" value="" />
             <input type="hidden" name="redirect" id="campo-redirect" value="" />
             <input
               class="email-input"
@@ -252,7 +273,7 @@
   </div>
 
   <script>
-    const respuestas = { edad: null, interes: null, ocasion: null };
+    const respuestas = { edad: null, interes: null, ocasion: null, personalidad: null };
 
     const libros = {
       vocales: {
@@ -279,10 +300,10 @@
     };
 
     function recomendar() {
-      const { edad, interes } = respuestas;
+      const { edad, interes, personalidad } = respuestas;
       if (edad === 'bebes') return 'vocales';
-      if (edad === 'mayores' || interes === 'universo') return 'familia';
-      if (interes === 'creatividad') return 'valentine';
+      if (interes === 'universo' || personalidad === 'curioso') return 'familia';
+      if (interes === 'creatividad' || personalidad === 'creativo') return 'valentine';
       return 'vocales';
     }
 
@@ -295,15 +316,16 @@
         if (paso === '1') { respuestas.edad = op.dataset.valor; document.getElementById('btn-1').disabled = false; }
         if (paso === '2') { respuestas.interes = op.dataset.valor; document.getElementById('btn-2').disabled = false; }
         if (paso === '3') { respuestas.ocasion = op.dataset.valor; document.getElementById('btn-3').disabled = false; }
+        if (paso === '4') { respuestas.personalidad = op.dataset.valor; document.getElementById('btn-4').disabled = false; }
       });
     });
 
     function avanzar(paso) {
       document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
       document.getElementById(`paso-${paso}`).classList.add('activo');
-      const pct = paso === 2 ? 66 : paso === 3 ? 100 : 33;
+      const pct = { 2: 50, 3: 75, 4: 100 }[paso] || 25;
       document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-label').textContent = `Paso ${paso} de 3`;
+      document.getElementById('progress-label').textContent = `Paso ${paso} de 4`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -313,6 +335,7 @@
       document.getElementById('campo-libro').value = libro;
       document.getElementById('campo-edad').value = respuestas.edad;
       document.getElementById('campo-interes').value = respuestas.interes;
+      document.getElementById('campo-personalidad').value = respuestas.personalidad;
       document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + libro;
 
       document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
@@ -357,12 +380,12 @@
     }
 
     function reiniciar() {
-      respuestas.edad = null; respuestas.interes = null; respuestas.ocasion = null;
+      respuestas.edad = null; respuestas.interes = null; respuestas.ocasion = null; respuestas.personalidad = null;
       document.querySelectorAll('.opcion').forEach(o => o.classList.remove('seleccionada'));
-      ['btn-1','btn-2','btn-3'].forEach(id => document.getElementById(id).disabled = true);
+      ['btn-1','btn-2','btn-3','btn-4'].forEach(id => document.getElementById(id).disabled = true);
       document.getElementById('resultado').classList.remove('visible');
-      document.getElementById('progress-fill').style.width = '33%';
-      document.getElementById('progress-label').textContent = 'Paso 1 de 3';
+      document.getElementById('progress-fill').style.width = '25%';
+      document.getElementById('progress-label').textContent = 'Paso 1 de 4';
       document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
       document.getElementById('paso-1').classList.add('activo');
       window.scrollTo({ top: 0, behavior: 'smooth' });
