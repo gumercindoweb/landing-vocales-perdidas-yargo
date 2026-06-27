@@ -213,12 +213,12 @@
           <h2>¡Ya sé cuál es el libro perfecto para tu hijo!</h2>
           <p>Dejame tu email y te mando el resultado ahora — más una actividad sorpresa de regalo.</p>
 
-          <!-- Kit form: reemplazá KIT_FORM_ID con tu ID real -->
+          <!-- Kit form: reemplazá 9616766 con tu ID real -->
           <form class="email-form" id="kit-form"
-            action="https://app.kit.com/forms/KIT_FORM_ID/subscriptions"
+            action="https://app.kit.com/forms/9616766/subscriptions"
             method="post"
-            data-sv-form="KIT_FORM_ID"
-            data-uid="KIT_FORM_ID">
+            data-sv-form="9616766"
+            data-uid="9616766">
             <input type="hidden" name="fields[libro_recomendado]" id="campo-libro" value="" />
             <input type="hidden" name="fields[edad_hijo]" id="campo-edad" value="" />
             <input type="hidden" name="fields[interes]" id="campo-interes" value="" />
@@ -420,7 +420,7 @@
       const libro = recomendar();
       document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + libro;
       // Si Kit no está configurado (placeholder), mostramos resultado directo
-      if (this.action.includes('KIT_FORM_ID')) {
+      if (this.action.includes('9616766')) {
         e.preventDefault();
         mostrarResultado(libro);
       }
