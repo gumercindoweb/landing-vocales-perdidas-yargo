@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Las Vocales Perdidas — Yargo Creativa</title>
+<meta name="description" content="Un libro infantil que se lee, se recorta y se juega. Cinco conejitos perdieron las vocales y tu peque las encuentra jugando. Sin pantallas, desde los 0 a 3 años. Por Vismel Veloz · Yargo Creativa." />
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Las Vocales Perdidas — un libro que se lee, se recorta y se juega" />
+<meta property="og:description" content="Cinco conejitos perdieron las vocales. Tu peque las encuentra jugando, sin pantallas. Desde los 0 a 3 años. De Yargo Creativa." />
+<meta property="og:image" content="/banner.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --cream:#FFF8EE;        /* fondo crema claro */
+    --cream-2:#FCEFDD;
+    --ink:#33424A;          /* texto principal (frío, combina con turquesa) */
+    --ink-soft:#5E6E76;
+    --teal:#34B3C2;         /* turquesa de la marca */
+    --teal-dark:#1F8C99;
+    --pink:#F085B0;         /* rosa de la marca */
+    --pink-dark:#D85F90;
+    --yellow:#F6C944;       /* amarillo estrella */
+    --card:#FFFFFF;
+    --shadow:rgba(51,66,74,.14);
+    --radius:26px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Baloo 2',cursive;line-height:1.12;margin:0;}
+  p{margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:.55rem;font-family:'Baloo 2',cursive;font-weight:700;font-size:1.08rem;background:var(--pink);color:#fff;text-decoration:none;padding:1rem 1.9rem;border-radius:999px;border:none;cursor:pointer;box-shadow:0 8px 0 var(--pink-dark);transition:transform .12s ease, box-shadow .12s ease;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 0 var(--pink-dark);}
+  .btn:active{transform:translateY(4px);box-shadow:0 4px 0 var(--pink-dark);}
+  .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+  .btn .price{font-weight:600;font-size:.85rem;opacity:.92;}
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:40;background:rgba(255,248,238,.92);backdrop-filter:blur(8px);border-bottom:2px dashed rgba(52,179,194,.3);}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:.7rem 24px;max-width:1080px;margin:0 auto;}
+  .nav-in img{height:42px;width:auto;}
+  .nav-cta{font-family:'Baloo 2',cursive;font-weight:700;text-decoration:none;background:var(--teal);color:#fff;padding:.55rem 1.15rem;border-radius:999px;font-size:.95rem;box-shadow:0 4px 0 var(--teal-dark);}
+  .nav-cta:hover{background:var(--teal-dark);}
+
+  /* Floating vowels */
+  .vowel{position:absolute;font-family:'Baloo 2',cursive;font-weight:800;border-radius:18px;display:grid;place-items:center;width:60px;height:60px;font-size:1.9rem;color:#fff;box-shadow:0 8px 18px var(--shadow);user-select:none;z-index:1;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(var(--r,-8deg));}50%{transform:translateY(-14px) rotate(var(--r,-8deg));}}
+  .floaty{animation:float 5s ease-in-out infinite;}
+
+  /* Hero */
+  header.hero{position:relative;padding:56px 0 64px;text-align:center;overflow:hidden;}
+  .eyebrow{display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo 2',cursive;font-weight:700;font-size:.85rem;padding:.4rem 1rem;border-radius:999px;margin-bottom:1.2rem;}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;max-width:16ch;margin:0 auto;}
+  .hero h1 .hl{color:var(--pink-dark);}
+  .hero .sub{font-size:1.2rem;color:var(--ink-soft);margin:1.2rem auto 2rem;max-width:46ch;}
+  .hero-cta-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center;}
+  .hero-note{font-size:.9rem;color:var(--ink-soft);}
+  .hero-img{margin:42px auto 0;max-width:920px;border-radius:24px;box-shadow:0 30px 60px rgba(51,66,74,.28);overflow:hidden;border:6px solid #fff;}
+  .hero-img img{width:100%;display:block;}
+
+  /* Section base */
+  section{padding:68px 0;}
+  .kicker{font-family:'Baloo 2',cursive;font-weight:700;color:var(--pink-dark);text-transform:uppercase;letter-spacing:.12em;font-size:.85rem;margin-bottom:.7rem;}
+  h2.title{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;max-width:20ch;}
+  .lead{font-size:1.15rem;color:var(--ink-soft);max-width:58ch;margin-top:1rem;}
+
+  /* Problem (teal band) */
+  .problem{background:var(--teal);color:#fff;border-radius:40px;margin:0 16px;}
+  .problem .kicker{color:var(--yellow);}
+  .problem h2.title{color:#fff;}
+  .problem .lead{color:rgba(255,255,255,.92);max-width:60ch;}
+  .bunny-names{margin-top:1.4rem;font-family:'Baloo 2',cursive;font-weight:700;color:var(--yellow);font-size:1.05rem;}
+
+  /* Meet the bunnies */
+  .bunnies{text-align:center;}
+  .bunnies-img{max-width:620px;margin:28px auto 0;}
+  .bunnies-img img{width:100%;border-radius:24px;}
+  .names-row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1.6rem;}
+  .chip{background:#fff;border:2px solid rgba(52,179,194,.35);border-radius:999px;padding:.45rem 1rem;font-family:'Baloo 2',cursive;font-weight:700;color:var(--teal-dark);}
+  .chip b{color:var(--pink-dark);}
+
+  /* Deliverables */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+  .card{background:var(--card);border-radius:var(--radius);padding:32px 28px;border:2px solid rgba(51,66,74,.07);box-shadow:0 14px 30px rgba(51,66,74,.08);transition:transform .15s ease;}
+  .card:hover{transform:translateY(-6px);}
+  .card .ic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:1.9rem;margin-bottom:1.1rem;}
+  .card h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem;}
+  .card p{color:var(--ink-soft);font-size:1rem;}
+  .specs{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:34px;}
+  .spec{background:var(--cream-2);border-radius:14px;padding:.5rem 1rem;font-weight:700;color:var(--ink);font-size:.92rem;}
+
+  /* For whom */
+  .forwho{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;}
+  .fw{border-radius:var(--radius);padding:32px;}
+  .fw.yes{background:#E4F5F7;border:2px solid var(--teal);}
+  .fw.no{background:#FCE7F0;border:2px solid rgba(240,133,176,.6);}
+  .fw h3{font-size:1.25rem;margin-bottom:.8rem;}
+  .fw.yes h3{color:var(--teal-dark);}
+  .fw.no h3{color:var(--pink-dark);}
+  .fw p{color:var(--ink-soft);}
+
+  /* Author */
+  .author-grid{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center;margin-top:24px;}
+  .author-photo{width:200px;height:200px;border-radius:24px;object-fit:cover;border:5px solid #fff;box-shadow:0 16px 34px rgba(51,66,74,.2);}
+  .author-grid .kicker{margin-bottom:.5rem;}
+  .author-grid h2{font-size:clamp(1.7rem,3.5vw,2.3rem);font-weight:800;}
+  .author-grid p{color:var(--ink-soft);font-size:1.12rem;margin-top:1rem;}
+  .signature{font-family:'Baloo 2',cursive;font-weight:700;color:var(--pink-dark);margin-top:1rem;font-size:1.1rem;}
+
+  /* Final CTA */
+  .final{background:linear-gradient(155deg,var(--pink),var(--pink-dark));color:#fff;border-radius:40px;margin:0 16px;text-align:center;}
+  .final h2{font-size:clamp(2rem,4.5vw,2.8rem);font-weight:800;max-width:22ch;margin:0 auto 1.2rem;}
+  .final .btn{background:#fff;color:var(--pink-dark);box-shadow:0 8px 0 rgba(0,0,0,.16);}
+  .final .fineprint{margin-top:1.2rem;font-size:.92rem;color:rgba(255,255,255,.92);max-width:48ch;margin-left:auto;margin-right:auto;}
+
+  /* Newsletter */
+  .news{text-align:center;}
+  .news form{display:flex;gap:.6rem;max-width:480px;margin:1.6rem auto 0;flex-wrap:wrap;justify-content:center;}
+  .news input{flex:1 1 240px;padding:.95rem 1.1rem;border-radius:999px;border:2px solid rgba(51,66,74,.2);font-family:'Nunito';font-size:1rem;background:#fff;}
+  .news input:focus-visible{outline:3px solid var(--teal);outline-offset:1px;border-color:var(--teal);}
+  .news button{font-family:'Baloo 2',cursive;font-weight:700;border:none;background:var(--teal);color:#fff;padding:.95rem 1.6rem;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 var(--teal-dark);}
+  .news .todo{margin-top:.8rem;font-size:.78rem;color:var(--ink-soft);opacity:.75;}
+
+  /* Footer */
+  footer{background:var(--ink);color:var(--cream);text-align:center;padding:46px 24px;margin-top:68px;}
+  footer img{height:48px;margin:0 auto 12px;filter:brightness(0) invert(1);opacity:.95;}
+  footer .ftag{color:rgba(255,248,238,.72);margin-top:.2rem;}
+  footer a{color:var(--yellow);text-decoration:none;font-weight:700;}
+
+  @media (max-width:860px){
+    .cards{grid-template-columns:1fr;}
+    .forwho{grid-template-columns:1fr;}
+    .author-grid{grid-template-columns:1fr;text-align:center;justify-items:center;}
+    section{padding:54px 0;}
+    .vowel{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){.floaty{animation:none;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <img src="/logo.png" alt="Yargo Creativa" />
+    <a class="nav-cta" href="https://www.amazon.com/dp/B0D2VRS3DZ" target="_blank" rel="noopener">Comprar en Amazon</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="vowel floaty" style="--r:-10deg;top:30px;left:7%;background:var(--pink);">A</span>
+  <span class="vowel floaty" style="--r:9deg;top:120px;left:16%;background:var(--teal);animation-delay:.6s;">E</span>
+  <span class="vowel floaty" style="--r:-6deg;top:60px;right:9%;background:var(--yellow);color:var(--ink);animation-delay:1.2s;">I</span>
+  <span class="vowel floaty" style="--r:12deg;top:150px;right:16%;background:var(--pink-dark);animation-delay:.3s;">O</span>
+  <span class="vowel floaty" style="--r:-12deg;bottom:90px;left:8%;background:var(--teal-dark);animation-delay:.9s;">U</span>
+
+  <div class="wrap">
+    <span class="eyebrow">📚 Libro interactivo · 0 a 3 años y más · Vol. 1</span>
+    <h1>Cinco conejitos perdieron las vocales. Tu peque las encuentra <span class="hl">—jugando.</span></h1>
+    <p class="sub">Un libro que se lee, se recorta y se juega. Las vocales dejan de ser una lección y se vuelven una aventura. Sin pantallas.</p>
+    <div class="hero-cta-row">
+      <a class="btn" href="https://www.amazon.com/dp/B0D2VRS3DZ" target="_blank" rel="noopener">
+        Comprar en Amazon <span class="price">· ver precio</span>
+      </a>
+      <span class="hero-note">Envío y garantía por Amazon</span>
+    </div>
+    <div class="hero-img">
+      <img src="/banner.png" alt="El libro Las Vocales Perdidas abierto, mostrando la portada y una página interior con la letra A y los conejitos" />
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM -->
+<section>
+  <div class="problem">
+    <div class="wrap" style="padding-top:60px;padding-bottom:60px;">
+      <div class="kicker">El problema</div>
+      <h2 class="title">Las vocales por repetición aburren. La pantalla entretiene, pero no deja nada en las manos.</h2>
+      <p class="lead">Agustín, Elisabeta, Ifigenio, Odilón y Ulegario perdieron sus vocales—y para ayudarlos, tu peque las reconoce, las traza con el dedito y las recorta. Aprende sin darse cuenta de que está aprendiendo.</p>
+      <div class="bunny-names">A · E · I · O · U — cinco conejitos, cinco vocales por rescatar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET THE BUNNIES -->
+<section>
+  <div class="wrap bunnies">
+    <div class="kicker">Conoce a los protagonistas</div>
+    <h2 class="title" style="margin:0 auto;">Cinco conejitos de Pascua al rescate</h2>
+    <div class="bunnies-img">
+      <img src="/cinco-conejos.png" alt="Los cinco conejitos protagonistas de Las Vocales Perdidas" />
+    </div>
+    <div class="names-row">
+      <span class="chip"><b>A</b> · Agustín</span>
+      <span class="chip"><b>E</b> · Elisabeta</span>
+      <span class="chip"><b>I</b> · Ifigenio</span>
+      <span class="chip"><b>O</b> · Odilón</span>
+      <span class="chip"><b>U</b> · Ulegario</span>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Qué recibe tu peque</div>
+    <h2 class="title">Tres formas de aprender en un solo libro</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="ic" style="background:#FCE7F0;">📖</div>
+        <h3>Historia ilustrada a dos caras</h3>
+        <p>La aventura de los 5 conejitos engancha con cuento, no con sermón. Vocales mayúsculas y minúsculas dentro de cada página.</p>
+      </div>
+      <div class="card">
+        <div class="ic" style="background:#E4F5F7;">✍️</div>
+        <h3>Trazo y pronunciación</h3>
+        <p>Repasa cada vocal con el dedito y practica cómo suena. Desarrolla la escritura y la motricidad fina desde los primeros años.</p>
+      </div>
+      <div class="card">
+        <div class="ic" style="background:#FCF1D2;">✂️</div>
+        <h3>Juego de memoria + flashcards</h3>
+        <p>Tarjetas para recortar y un juego de memoria que convierte las vocales en algo que se repite mil veces sin pelear.</p>
+      </div>
+    </div>
+    <div class="specs">
+      <span class="spec">📕 77 páginas</span>
+      <span class="spec">📐 8.25 × 8.25 in</span>
+      <span class="spec">🔤 Mayúsculas y minúsculas</span>
+      <span class="spec">✋ Motricidad fina</span>
+      <span class="spec">📵 Sin pantallas</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section>
+  <div class="wrap">
+    <div class="kicker">¿Es para tu familia?</div>
+    <h2 class="title">Hecho para manos curiosas, no para pantallas</h2>
+    <div class="forwho">
+      <div class="fw yes">
+        <h3>✅ Es para ti si…</h3>
+        <p>Quieres que tu peque, desde los 0 a 3 años, conozca las vocales con las manos y no con la pantalla. O eres docente y buscas material que de verdad enganche en el aula.</p>
+      </div>
+      <div class="fw no">
+        <h3>🚫 No es para ti si…</h3>
+        <p>Buscas una app o entretenimiento digital pasivo. Esto es papel, tijeras y tiempo juntos—y esa es justo la idea.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<section>
+  <div class="wrap">
+    <div class="author-grid">
+      <img class="author-photo" src="/autora.png" alt="Vismel Veloz, autora de Las Vocales Perdidas" />
+      <div>
+        <div class="kicker">Quién está detrás</div>
+        <h2>Hecho por una mamá, no por una editorial.</h2>
+        <p>Soy Vismel, mamá y emprendedora apasionada por la educación. Creé <em>Las Vocales Perdidas</em> para que aprender las primeras letras se sintiera como jugar en familia—con papel, color y un ratito juntos lejos de la pantalla.</p>
+        <p class="signature">— Vismel Veloz · Yargo Creativa</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section>
+  <div class="final">
+    <div class="wrap" style="padding-top:70px;padding-bottom:70px;">
+      <h2>Las vocales se perdieron. La aventura para encontrarlas ya está lista.</h2>
+      <a class="btn" href="https://www.amazon.com/dp/B0D2VRS3DZ" target="_blank" rel="noopener">Comprar en Amazon</a>
+      <p class="fineprint">Pago y envío los maneja Amazon—compra con la confianza de siempre y con sus garantías de devolución.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section>
+  <div class="wrap news">
+    <div class="kicker">Antes de irte</div>
+    <h2 class="title" style="margin:0 auto;">¿Más actividades sin pantallas?</h2>
+    <p class="lead" style="margin:1rem auto 0;">Recibe ideas para jugar y aprender en familia, y entérate primero de cada nuevo libro de Yargo.</p>
+    <!-- TODO: conectar a herramienta de email (Mailchimp/Kit/Formspree). Form sin acción por ahora. -->
+    <form onsubmit="event.preventDefault(); this.querySelector('.done').hidden=false;">
+      <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Tu correo</label>
+      <input id="email" type="email" required placeholder="tucorreo@ejemplo.com" autocomplete="email" />
+      <button type="submit">Quiero ideas</button>
+      <p class="done" hidden style="flex:1 1 100%;color:var(--teal-dark);font-weight:700;">¡Gracias! Te avisaremos. (Pendiente conectar el correo.)</p>
+    </form>
+    <p class="todo">Nota interna: formulario sin conexión todavía — falta enlazar tu herramienta de email.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="/logo.png" alt="Yargo Creativa" />
+  <p class="ftag">La magia que transforma el papel · <a href="https://instagram.com/yargocreativa" target="_blank" rel="noopener">@yargocreativa</a> · yargocreativa@gmail.com</p>
+</footer>
+
+</body>
+</html>
