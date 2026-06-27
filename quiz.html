@@ -275,6 +275,30 @@
   <script>
     const respuestas = { edad: null, interes: null, ocasion: null, personalidad: null };
 
+    async function registrarEnSupabase(email, nombre) {
+      try {
+        const libro = recomendar();
+        const response = await fetch('https://epkyrbhzmuivxwmelayz.functions.supabase.co/registrar-quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            nombre,
+            edad_hijo: respuestas.edad,
+            interes: respuestas.interes,
+            ocasion: respuestas.ocasion,
+            personalidad: respuestas.personalidad,
+            libro_recomendado: libro
+          })
+        });
+        if (!response.ok) {
+          console.error('Error registrando en Supabase:', await response.text());
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    }
+
     const libros = {
       vocales: {
         nombre: 'Las Vocales Perdidas',
