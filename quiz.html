@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cuál libro es para tu hijo? — Yargo Creativa</title>
+  <meta name="description" content="Respondé 3 preguntas y descubrí qué libro de Vismel Veloz es perfecto para tu hijo. Resultado inmediato y gratis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:      #FFF8EE;
+      --cream-2:    #FCEFDD;
+      --ink:        #33424A;
+      --ink-soft:   #5E6E76;
+      --teal:       #34B3C2;
+      --teal-dark:  #1F8C99;
+      --teal-light: #E4F5F7;
+      --pink:       #F085B0;
+      --pink-dark:  #D85F90;
+      --pink-light: #FCE7F0;
+      --yellow:     #F6C944;
+      --card:       #FFFFFF;
+      --radius:     26px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', system-ui, sans-serif; background: var(--cream); color: var(--ink); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav { background: rgba(255,248,238,.9); backdrop-filter: blur(8px); border-bottom: 1.5px dashed rgba(52,179,194,.3); padding: 14px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .nav-logo { height: 38px; }
+    .nav-back { font-family: 'Baloo 2', sans-serif; font-weight: 600; font-size: .9rem; color: var(--ink-soft); text-decoration: none; }
+    .nav-back:hover { color: var(--teal-dark); }
+
+    /* QUIZ WRAPPER */
+    .quiz-page { padding: 48px 0 80px; }
+    .quiz-header { text-align: center; margin-bottom: 40px; }
+    .quiz-eyebrow { display: inline-block; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-dark); background: var(--teal-light); border-radius: 999px; padding: .3rem 1rem; margin-bottom: 14px; }
+    .quiz-header h1 { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.4rem); color: var(--ink); line-height: 1.2; margin-bottom: 10px; }
+    .quiz-header p { color: var(--ink-soft); font-size: 1rem; }
+
+    /* PROGRESS */
+    .progress-bar { background: var(--cream-2); border-radius: 999px; height: 6px; margin-bottom: 40px; }
+    .progress-fill { background: linear-gradient(90deg, var(--teal), var(--pink)); height: 6px; border-radius: 999px; transition: width .4s ease; }
+    .progress-label { font-family: 'Baloo 2', sans-serif; font-size: .82rem; font-weight: 600; color: var(--ink-soft); text-align: right; margin-bottom: 8px; }
+
+    /* PASO */
+    .paso { display: none; }
+    .paso.activo { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .paso-titulo { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--ink); margin-bottom: 24px; text-align: center; }
+    .opciones { display: flex; flex-direction: column; gap: 14px; }
+    .opcion { background: var(--card); border: 2px solid rgba(51,66,74,.1); border-radius: 18px; padding: 18px 22px; cursor: pointer; display: flex; align-items: center; gap: 16px; transition: border-color .18s, box-shadow .18s, transform .18s; }
+    .opcion:hover { border-color: var(--teal); box-shadow: 0 8px 20px rgba(52,179,194,.15); transform: translateY(-2px); }
+    .opcion.seleccionada { border-color: var(--teal); background: var(--teal-light); box-shadow: 0 8px 20px rgba(52,179,194,.2); }
+    .opcion-emoji { font-size: 1.8rem; flex-shrink: 0; }
+    .opcion-texto { font-family: 'Baloo 2', sans-serif; font-weight: 600; font-size: 1rem; color: var(--ink); }
+    .opcion-sub { font-size: .82rem; color: var(--ink-soft); font-family: 'Nunito', sans-serif; font-weight: 400; margin-top: 2px; }
+
+    /* BOTÓN SIGUIENTE */
+    .btn-siguiente { display: block; width: 100%; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.05rem; background: var(--teal); color: #fff; border: none; border-radius: 999px; padding: 1rem; margin-top: 28px; cursor: pointer; box-shadow: 0 5px 0 var(--teal-dark); transition: transform .18s, box-shadow .18s; }
+    .btn-siguiente:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--teal-dark); }
+    .btn-siguiente:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: 0 5px 0 var(--teal-dark); }
+
+    /* CAPTURA EMAIL */
+    .email-section { text-align: center; }
+    .email-section h2 { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--ink); margin-bottom: 10px; line-height: 1.25; }
+    .email-section p { color: var(--ink-soft); margin-bottom: 28px; font-size: .98rem; line-height: 1.6; }
+    .email-form { display: flex; flex-direction: column; gap: 12px; }
+    .email-input { font-family: 'Nunito', sans-serif; font-size: 1rem; padding: 1rem 1.3rem; border: 2px solid rgba(51,66,74,.15); border-radius: 999px; outline: none; transition: border-color .18s; width: 100%; }
+    .email-input:focus { border-color: var(--teal); }
+    .btn-resultado { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.05rem; background: linear-gradient(135deg, var(--pink), var(--pink-dark)); color: #fff; border: none; border-radius: 999px; padding: 1rem; cursor: pointer; box-shadow: 0 5px 0 var(--pink-dark); transition: transform .18s, box-shadow .18s; }
+    .btn-resultado:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--pink-dark); }
+    .email-disclaimer { font-size: .78rem; color: var(--ink-soft); margin-top: 8px; }
+
+    /* RESULTADO */
+    .resultado-section { display: none; text-align: center; }
+    .resultado-section.visible { display: block; animation: fadeIn .4s ease; }
+    .resultado-badge { display: inline-block; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; background: var(--yellow); color: #5a4200; border-radius: 999px; padding: .3rem 1rem; margin-bottom: 20px; }
+    .resultado-section h2 { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--ink); margin-bottom: 10px; }
+    .resultado-section .porque { color: var(--ink-soft); font-size: .98rem; line-height: 1.65; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .resultado-libro-cover { max-width: 200px; margin: 0 auto 24px; border-radius: 16px; box-shadow: 0 16px 36px rgba(51,66,74,.2); }
+    .resultado-libro-nombre { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--ink); margin-bottom: 6px; }
+    .resultado-libro-edad { font-size: .85rem; color: var(--ink-soft); margin-bottom: 20px; }
+    .btn-amazon { display: inline-block; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1rem; background: #FF9900; color: #fff; padding: .85rem 2rem; border-radius: 999px; text-decoration: none; box-shadow: 0 4px 0 #c47400; transition: transform .18s, box-shadow .18s; margin-bottom: 32px; }
+    .btn-amazon:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #c47400; }
+    .otros-libros { background: var(--card); border-radius: var(--radius); padding: 24px; border: 2px solid rgba(51,66,74,.07); }
+    .otros-titulo { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .85rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 16px; }
+    .otros-grid { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .otro-libro { text-align: center; max-width: 120px; text-decoration: none; color: var(--ink); }
+    .otro-libro img { border-radius: 10px; box-shadow: 0 6px 14px rgba(51,66,74,.14); margin-bottom: 8px; }
+    .otro-libro span { font-family: 'Baloo 2', sans-serif; font-size: .82rem; font-weight: 600; display: block; }
+    .btn-reiniciar { background: none; border: 2px solid rgba(51,66,74,.15); border-radius: 999px; font-family: 'Baloo 2', sans-serif; font-weight: 600; font-size: .9rem; color: var(--ink-soft); padding: .6rem 1.4rem; cursor: pointer; margin-top: 24px; transition: border-color .18s; }
+    .btn-reiniciar:hover { border-color: var(--teal); color: var(--teal-dark); }
+
+    @media (max-width: 600px) { .quiz-page { padding: 32px 0 60px; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/index.html"><img src="/logo.png" alt="Yargo Creativa" class="nav-logo" /></a>
+      <a href="/index.html" class="nav-back">← Volver al inicio</a>
+    </div>
+  </nav>
+
+  <div class="quiz-page">
+    <div class="wrap">
+
+      <!-- HEADER -->
+      <div class="quiz-header">
+        <div class="quiz-eyebrow">✨ Quiz gratuito</div>
+        <h1>¿Cuál libro de Vismel<br/>es para tu hijo?</h1>
+        <p>3 preguntas · 60 segundos · resultado inmediato</p>
+      </div>
+
+      <!-- PROGRESO -->
+      <p class="progress-label" id="progress-label">Paso 1 de 3</p>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:33%"></div></div>
+
+      <!-- PASO 1: EDAD -->
+      <div class="paso activo" id="paso-1">
+        <p class="paso-titulo">¿Cuántos años tiene tu hijo?</p>
+        <div class="opciones">
+          <div class="opcion" data-paso="1" data-valor="bebes">
+            <span class="opcion-emoji">🍼</span>
+            <div><div class="opcion-texto">0 a 3 años</div><div class="opcion-sub">Bebé o niño pequeño</div></div>
+          </div>
+          <div class="opcion" data-paso="1" data-valor="ninos">
+            <span class="opcion-emoji">🎨</span>
+            <div><div class="opcion-texto">4 a 8 años</div><div class="opcion-sub">Edad de juego y creatividad</div></div>
+          </div>
+          <div class="opcion" data-paso="1" data-valor="mayores">
+            <span class="opcion-emoji">🔭</span>
+            <div><div class="opcion-texto">5 a 12 años</div><div class="opcion-sub">Ya lee solo o con poca ayuda</div></div>
+          </div>
+        </div>
+        <button class="btn-siguiente" id="btn-1" disabled onclick="avanzar(2)">Siguiente →</button>
+      </div>
+
+      <!-- PASO 2: QUÉ APRENDER -->
+      <div class="paso" id="paso-2">
+        <p class="paso-titulo">¿Qué le querés enseñar?</p>
+        <div class="opciones">
+          <div class="opcion" data-paso="2" data-valor="letras">
+            <span class="opcion-emoji">🔤</span>
+            <div><div class="opcion-texto">Letras, vocales y lenguaje</div><div class="opcion-sub">Iniciarlo en la lectura de forma divertida</div></div>
+          </div>
+          <div class="opcion" data-paso="2" data-valor="universo">
+            <span class="opcion-emoji">🌍</span>
+            <div><div class="opcion-texto">El universo, planetas y el mundo</div><div class="opcion-sub">Que entienda su lugar en el cosmos</div></div>
+          </div>
+          <div class="opcion" data-paso="2" data-valor="creatividad">
+            <span class="opcion-emoji">🎨</span>
+            <div><div class="opcion-texto">Arte, creatividad y expresión</div><div class="opcion-sub">Que juegue, pinte y se exprese</div></div>
+          </div>
+        </div>
+        <button class="btn-siguiente" id="btn-2" disabled onclick="avanzar(3)">Siguiente →</button>
+      </div>
+
+      <!-- PASO 3: OCASIÓN -->
+      <div class="paso" id="paso-3">
+        <p class="paso-titulo">¿Para qué ocasión?</p>
+        <div class="opciones">
+          <div class="opcion" data-paso="3" data-valor="diario">
+            <span class="opcion-emoji">📖</span>
+            <div><div class="opcion-texto">Para leer juntos todos los días</div><div class="opcion-sub">Quiero crear un hábito de lectura</div></div>
+          </div>
+          <div class="opcion" data-paso="3" data-valor="regalo">
+            <span class="opcion-emoji">🎁</span>
+            <div><div class="opcion-texto">Como regalo especial</div><div class="opcion-sub">Cumpleaños, Navidad, Pascua…</div></div>
+          </div>
+          <div class="opcion" data-paso="3" data-valor="aula">
+            <span class="opcion-emoji">🏫</span>
+            <div><div class="opcion-texto">Para usar en el aula o jardín</div><div class="opcion-sub">Soy maestra o educadora</div></div>
+          </div>
+        </div>
+        <button class="btn-siguiente" id="btn-3" disabled onclick="mostrarEmail()">Ver mi resultado →</button>
+      </div>
+
+      <!-- PASO 4: CAPTURA EMAIL -->
+      <div class="paso" id="paso-email">
+        <div class="email-section">
+          <div style="font-size:3.5rem;margin-bottom:16px;">🐰✨</div>
+          <h2>¡Ya sé cuál es el libro perfecto para tu hijo!</h2>
+          <p>Dejame tu email y te mando el resultado ahora — más una actividad sorpresa de regalo.</p>
+
+          <!-- Kit form: reemplazá KIT_FORM_ID con tu ID real -->
+          <form class="email-form" id="kit-form"
+            action="https://app.kit.com/forms/KIT_FORM_ID/subscriptions"
+            method="post"
+            data-sv-form="KIT_FORM_ID"
+            data-uid="KIT_FORM_ID">
+            <input type="hidden" name="fields[libro_recomendado]" id="campo-libro" value="" />
+            <input type="hidden" name="fields[edad_hijo]" id="campo-edad" value="" />
+            <input type="hidden" name="fields[interes]" id="campo-interes" value="" />
+            <input type="hidden" name="redirect" id="campo-redirect" value="" />
+            <input
+              class="email-input"
+              type="email"
+              name="email_address"
+              placeholder="tucorreo@ejemplo.com"
+              required
+              autocomplete="email"
+            />
+            <input
+              class="email-input"
+              type="text"
+              name="fields[first_name]"
+              placeholder="Tu nombre (opcional)"
+              autocomplete="given-name"
+            />
+            <button type="submit" class="btn-resultado">¡Mostrame mi libro! →</button>
+          </form>
+          <p class="email-disclaimer">Sin spam. Solo libros y aventuras para tu hijo. Podés darte de baja cuando quieras.</p>
+
+          <!-- Fallback: si no tienen Kit aún, mostrar directo -->
+          <p style="margin-top:20px;font-size:.82rem;color:var(--ink-soft);">
+            <a href="#" onclick="saltarEmail(event)" style="color:var(--teal-dark);font-weight:600;">Prefiero ver el resultado sin suscribirme →</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- RESULTADO -->
+      <div class="resultado-section" id="resultado">
+        <span class="resultado-badge">🎉 Tu libro ideal</span>
+        <h2 id="resultado-titulo"></h2>
+        <p class="porque" id="resultado-porque"></p>
+        <img id="resultado-cover" src="" alt="" class="resultado-libro-cover" />
+        <div class="resultado-libro-nombre" id="resultado-nombre"></div>
+        <div class="resultado-libro-edad" id="resultado-edad"></div>
+        <br/>
+        <a id="resultado-amazon" href="#" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon →</a>
+
+        <div class="otros-libros">
+          <p class="otros-titulo">También te puede interesar</p>
+          <div class="otros-grid" id="otros-libros"></div>
+        </div>
+
+        <button class="btn-reiniciar" onclick="reiniciar()">↩ Hacer el quiz de nuevo</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const respuestas = { edad: null, interes: null, ocasion: null };
+
+    const libros = {
+      vocales: {
+        nombre: 'Las Vocales Perdidas',
+        edad: 'Para bebés y niños de 0 a 3 años',
+        cover: '/libro-vocales-tapa.jpg',
+        amazon: 'https://www.amazon.com/-/es/Las-Vocales-Perdidas-Conejitos-rescate/dp/B0D2VRS3DZ',
+        porque: 'Con rimas, cuentos y actividades interactivas, este libro convierte aprender las vocales en una aventura mágica. Ideal para los primeros años y para leer juntos en voz alta.'
+      },
+      familia: {
+        nombre: 'Mi Gran Familia',
+        edad: 'Para niños de 5 a 12 años',
+        cover: '/libro-familia.jpg',
+        amazon: 'https://www.amazon.com/-/es/Mi-Gran-Familia-Universo-Spanish/dp/B0CN62RMN7',
+        porque: 'El universo explicado como una familia: los planetas son los tíos, los continentes las hijas. Una forma mágica de responder las grandes preguntas que todo niño se hace sobre el mundo.'
+      },
+      valentine: {
+        nombre: "Valentine's Day Coloring Book",
+        edad: 'Para niños de 4 a 8 años (en inglés)',
+        cover: '/libro-valentine.jpg',
+        amazon: 'https://www.amazon.com/-/es/VALENTINE%C2%B4S-DAY-COLORING-Vismel-Veloz/dp/B0CSKB6XY6',
+        porque: '32 ilustraciones creativas para colorear: unicornios, galaxias de corazones, cupcakes y más. El espacio de "Firma del Artista" en cada página convierte cada coloreo en una obra de arte propia.'
+      }
+    };
+
+    function recomendar() {
+      const { edad, interes } = respuestas;
+      if (edad === 'bebes') return 'vocales';
+      if (edad === 'mayores' || interes === 'universo') return 'familia';
+      if (interes === 'creatividad') return 'valentine';
+      return 'vocales';
+    }
+
+    // Selección de opciones
+    document.querySelectorAll('.opcion').forEach(op => {
+      op.addEventListener('click', () => {
+        const paso = op.dataset.paso;
+        document.querySelectorAll(`.opcion[data-paso="${paso}"]`).forEach(o => o.classList.remove('seleccionada'));
+        op.classList.add('seleccionada');
+        if (paso === '1') { respuestas.edad = op.dataset.valor; document.getElementById('btn-1').disabled = false; }
+        if (paso === '2') { respuestas.interes = op.dataset.valor; document.getElementById('btn-2').disabled = false; }
+        if (paso === '3') { respuestas.ocasion = op.dataset.valor; document.getElementById('btn-3').disabled = false; }
+      });
+    });
+
+    function avanzar(paso) {
+      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+      document.getElementById(`paso-${paso}`).classList.add('activo');
+      const pct = paso === 2 ? 66 : paso === 3 ? 100 : 33;
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = `Paso ${paso} de 3`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function mostrarEmail() {
+      const libro = recomendar();
+      // Prellenar campos ocultos del form de Kit
+      document.getElementById('campo-libro').value = libro;
+      document.getElementById('campo-edad').value = respuestas.edad;
+      document.getElementById('campo-interes').value = respuestas.interes;
+      document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + libro;
+
+      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+      document.getElementById('paso-email').classList.add('activo');
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = '¡Casi listo!';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function saltarEmail(e) {
+      e.preventDefault();
+      const libro = recomendar();
+      mostrarResultado(libro);
+    }
+
+    function mostrarResultado(libroKey) {
+      const libro = libros[libroKey];
+      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+      document.getElementById('paso-email').classList.remove('activo');
+
+      document.getElementById('resultado-titulo').textContent = '¡El libro perfecto para tu hijo es…';
+      document.getElementById('resultado-porque').textContent = libro.porque;
+      document.getElementById('resultado-cover').src = libro.cover;
+      document.getElementById('resultado-cover').alt = libro.nombre;
+      document.getElementById('resultado-nombre').textContent = libro.nombre;
+      document.getElementById('resultado-edad').textContent = libro.edad;
+      document.getElementById('resultado-amazon').href = libro.amazon;
+
+      // Otros libros
+      const otros = Object.entries(libros).filter(([k]) => k !== libroKey);
+      document.getElementById('otros-libros').innerHTML = otros.map(([, l]) =>
+        `<a href="${l.amazon}" target="_blank" rel="noopener" class="otro-libro">
+          <img src="${l.cover}" alt="${l.nombre}" style="width:90px;height:120px;object-fit:cover;" />
+          <span>${l.nombre}</span>
+        </a>`
+      ).join('');
+
+      document.getElementById('resultado').classList.add('visible');
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = '¡Tu resultado está listo!';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function reiniciar() {
+      respuestas.edad = null; respuestas.interes = null; respuestas.ocasion = null;
+      document.querySelectorAll('.opcion').forEach(o => o.classList.remove('seleccionada'));
+      ['btn-1','btn-2','btn-3'].forEach(id => document.getElementById(id).disabled = true);
+      document.getElementById('resultado').classList.remove('visible');
+      document.getElementById('progress-fill').style.width = '33%';
+      document.getElementById('progress-label').textContent = 'Paso 1 de 3';
+      document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+      document.getElementById('paso-1').classList.add('activo');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Manejar submit del form de Kit
+    document.getElementById('kit-form').addEventListener('submit', function(e) {
+      const libro = recomendar();
+      document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + libro;
+      // Si Kit no está configurado (placeholder), mostramos resultado directo
+      if (this.action.includes('KIT_FORM_ID')) {
+        e.preventDefault();
+        mostrarResultado(libro);
+      }
+    });
+
+    // Detectar resultado en URL (post-redirect de Kit)
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('resultado')) {
+      const libroParam = params.get('resultado');
+      if (libros[libroParam]) {
+        document.getElementById('progress-label').textContent = '¡Tu resultado está listo!';
+        document.getElementById('progress-fill').style.width = '100%';
+        document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+        mostrarResultado(libroParam);
+      }
+    }
+  </script>
+
+</body>
+</html>

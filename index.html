@@ -50,10 +50,15 @@
 
   /* Nav */
   nav{position:sticky;top:0;z-index:40;background:rgba(255,248,238,.92);backdrop-filter:blur(8px);border-bottom:2px dashed rgba(52,179,194,.3);}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:.7rem 24px;max-width:1080px;margin:0 auto;}
-  .nav-in img{height:42px;width:auto;}
-  .nav-cta{font-family:'Baloo 2',cursive;font-weight:700;text-decoration:none;background:var(--teal);color:#fff;padding:.55rem 1.15rem;border-radius:999px;font-size:.95rem;box-shadow:0 4px 0 var(--teal-dark);}
-  .nav-cta:hover{background:var(--teal-dark);}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:.7rem 24px;max-width:1080px;margin:0 auto;}
+  .nav-in img{height:42px;width:auto;flex-shrink:0;}
+  .nav-links{display:flex;align-items:center;gap:20px;}
+  .nav-links a{font-family:'Baloo 2',cursive;font-weight:600;font-size:.88rem;color:var(--ink-soft);text-decoration:none;white-space:nowrap;}
+  .nav-links a:hover{color:var(--teal-dark);}
+  .nav-links a.active{color:var(--teal-dark);}
+  .nav-cta{font-family:'Baloo 2',cursive;font-weight:700;text-decoration:none;background:var(--pink);color:#fff;padding:.55rem 1.15rem;border-radius:999px;font-size:.88rem;box-shadow:0 4px 0 var(--pink-dark);white-space:nowrap;}
+  .nav-cta:hover{background:var(--pink-dark);}
+  @media(max-width:680px){.nav-links a:not(.nav-cta){display:none;}}
 
   /* Floating vowels */
   .vowel{position:absolute;font-family:'Baloo 2',cursive;font-weight:800;border-radius:18px;display:grid;place-items:center;width:60px;height:60px;font-size:1.9rem;color:#fff;box-shadow:0 8px 18px var(--shadow);user-select:none;z-index:1;}
@@ -156,7 +161,12 @@
 <nav>
   <div class="nav-in">
     <img src="/logo.png" alt="Yargo Creativa" />
-    <a class="nav-cta" href="https://www.amazon.com/dp/B0D2VRS3DZ" target="_blank" rel="noopener">Comprar en Amazon</a>
+    <div class="nav-links">
+      <a href="/index.html" class="active">Las Vocales Perdidas</a>
+      <a href="/mi-gran-familia.html">Mi Gran Familia</a>
+      <a href="/valentine.html">Valentine's Day</a>
+      <a href="/quiz.html" class="nav-cta">¿Cuál es para mi hijo? →</a>
+    </div>
   </div>
 </nav>
 
