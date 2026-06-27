@@ -266,7 +266,32 @@
           <div class="otros-grid" id="otros-libros"></div>
         </div>
 
-        <button class="btn-reiniciar" onclick="reiniciar()">↩ Hacer el quiz de nuevo</button>
+        <!-- EMAIL CAPTURE -->
+        <div style="margin-top: 48px; padding: 28px; background: var(--cream-2); border-radius: var(--radius); text-align: center;">
+          <h3 style="font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 12px;">Recibí contenido personalizado</h3>
+          <p style="color: var(--ink-soft); margin-bottom: 20px; font-size: 0.95rem;">Enviamos recomendaciones especiales para cada tipo de aprendiz</p>
+
+          <form class="email-form" id="kit-form"
+            action="https://app.kit.com/forms/9616766/subscriptions"
+            method="post"
+            data-sv-form="9616766"
+            data-uid="9616766">
+            <input type="hidden" name="fields[archetype]" id="campo-archetype" value="" />
+            <input type="hidden" name="redirect" id="campo-redirect" value="" />
+            <input
+              class="email-input"
+              type="email"
+              name="email_address"
+              placeholder="tu@email.com"
+              required
+              autocomplete="email"
+            />
+            <button type="submit" class="btn-resultado">Recibir recomendaciones →</button>
+          </form>
+          <p class="email-disclaimer">Sin spam. Solo contenido que amas. Desuscríbete cuando quieras.</p>
+        </div>
+
+        <button class="btn-reiniciar" onclick="reiniciar()" style="margin-top: 24px;">↩ Hacer el quiz de nuevo</button>
       </div>
 
     </div>
@@ -396,6 +421,10 @@
       document.getElementById('resultado-grade').textContent = grade;
       document.getElementById('resultado-shareable').textContent = data.shareable;
 
+      // Prellenar form Kit con archetype
+      document.getElementById('campo-archetype').value = archetype;
+      document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + archetype;
+
       // Mostrar libros recomendados
       const librosRecomendados = data.libros.map(key => libros[key]);
       document.getElementById('otros-libros').innerHTML = librosRecomendados.map(l =>
@@ -423,14 +452,10 @@
     }
 
     // Manejar submit del form de Kit
-    document.getElementById('kit-form').addEventListener('submit', function(e) {
-      const libro = recomendar();
-      document.getElementById('campo-redirect').value = window.location.origin + '/quiz.html?resultado=' + libro;
-      // Si Kit no está configurado (placeholder), mostramos resultado directo
-      if (this.action.includes('9616766')) {
-        e.preventDefault();
-        mostrarResultado(libro);
-      }
+    document.getElementById('kit-form').addEventListener('submit', async function(e) {
+      const email = this.querySelector('input[type="email"]').value;
+      const archetype = document.getElementById('campo-archetype').value;
+      await registrarEnSupabase(email, 'padre/madre', archetype);
     });
 
     // Detectar resultado en URL (post-redirect de Kit)
